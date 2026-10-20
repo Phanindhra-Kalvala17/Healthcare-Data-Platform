@@ -1,0 +1,24 @@
+# Secrets: never commit
+.env
+.env.*
+!.env.example
+credentials.json
+token.json
+*.pem
+*.key
+.streamlit/secrets.toml
+
+# Patient data and pipeline outputs (synthetic now, real later)
+data/
+.tmp*/
+
+# Local environment and caches
+.venv/
+__pycache__/
+.pytest_cache/
+
+# Terraform: provider downloads, state (can contain secrets) and plans
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan

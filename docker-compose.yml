@@ -1,0 +1,20 @@
+services:
+  ministack:
+    image: ministackorg/ministack:1.5.29-full  # full edition: real Athena SQL via DuckDB
+    ports:
+      - "127.0.0.1:4566:4566"
+
+  pipeline:
+    build: .
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+
+  dashboard:
+    build: .
+    env_file: .env
+    command: ["streamlit", "run", "dashboard/app.py", "--server.address=0.0.0.0", "--server.port=8501"]
+    ports:
+      - "127.0.0.1:8501:8501"
+    volumes:
+      - ./data:/app/data:ro

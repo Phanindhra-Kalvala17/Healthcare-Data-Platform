@@ -1,0 +1,39 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ListLake",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "${bucket_arn}"
+    },
+    {
+      "Sid": "ReadLanding",
+      "Effect": "Allow",
+      "Action": "s3:GetObject",
+      "Resource": "${bucket_arn}/landing/*"
+    },
+    {
+      "Sid": "AppendOnlyBronze",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:PutObject"],
+      "Resource": "${bucket_arn}/bronze/*"
+    },
+    {
+      "Sid": "RebuildDerivedZones",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"],
+      "Resource": [
+        "${bucket_arn}/silver/*",
+        "${bucket_arn}/gold/*",
+        "${bucket_arn}/quarantine/*"
+      ]
+    },
+    {
+      "Sid": "UseLakeKey",
+      "Effect": "Allow",
+      "Action": ["kms:Decrypt", "kms:GenerateDataKey"],
+      "Resource": "${kms_key_arn}"
+    }
+  ]
+}

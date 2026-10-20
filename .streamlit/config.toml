@@ -1,0 +1,7 @@
+[server]
+# local runs listen on this machine only; docker-compose overrides with 0.0.0.0 behind a 127.0.0.1 port mapping
+address = "localhost"
+
+[browser]
+# no usage telemetry from a healthcare project
+gatherUsageStats = false
